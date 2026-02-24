@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❤️ รายการโปรด - MASKRIDER SHOP</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="amazon-header">
+        <a href="Html.html" class="logo">MASKRIDER SHOP</a>
+
+        <div class="search-bar">
+            <select>
+                <option>ทุกหมวดหมู่</option>
+                <option>อิเล็กทรอนิกส์</option>
+                <option>เสื้อผ้า</option>
+                <option>หนังสือ</option>
+                <option>บ้านและสวน</option>
+            </select>
+            <input type="text" placeholder="ค้นหาสินค้า...">
+            <button>🔍 ค้นหา</button>
+        </div>
+
+        <div class="header-links">
+            <a id="accountLink" href="login.html">👤 บัญชีของฉัน</a>
+            <a id="logoutLink" href="#" style="display:none;">ออกจากระบบ</a>
+            <a href="#">🛒 ตะกร้าสินค้า</a>
+            <a href="favorites.html">❤️ รายการโปรด (<span id="favoritesCount">0</span>)</a>
+        </div>
+    </header>
+
+    <nav>
+        <ul class="head-menu">
+            <li><a href="Html.html">หน้าแรก</a></li>
+            <li><a href="about.html">เกี่ยวกับเรา</a></li>
+            <li><a href="services.html">บริการ</a></li>
+            <li><a href="contact.html">ติดต่อเรา</a></li>
+        </ul>
+    </nav>
+
+    <section style="padding: 60px 20px; max-width: 1200px; margin: 0 auto;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+            <h1 style="font-size: 36px; color: #131921;">❤️ รายการโปรด</h1>
+            <button id="clearFavoritesBtn" class="buy-button" style="width: auto;">ล้างทั้งหมด</button>
+        </div>
+
+        <div id="favoritesList" class="favorites-list" style="margin-top: 20px;"></div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>เกี่ยวกับเรา</h3>
+                <ul>
+                    <li><a href="#">ประวัติบริษัท</a></li>
+                    <li><a href="#">ทีมงาน</a></li>
+                    <li><a href="#">ร่วมงานกับเรา</a></li>
+                    <li><a href="#">ข่าวสาร</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>บริการลูกค้า</h3>
+                <ul>
+                    <li><a href="#">ศูนย์ช่วยเหลือ</a></li>
+                    <li><a href="#">การจัดส่ง</a></li>
+                    <li><a href="#">การคืนสินค้า</a></li>
+                    <li><a href="#">ติดต่อเรา</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>หมวดหมู่สินค้า</h3>
+                <ul>
+                    <li><a href="#">อิเล็กทรอนิกส์</a></li>
+                    <li><a href="#">เสื้อผ้า</a></li>
+                    <li><a href="#">หนังสือ</a></li>
+                    <li><a href="#">บ้านและสวน</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>ติดตามเรา</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="favorites.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

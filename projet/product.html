@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายละเอียดสินค้า - MASKRIDER SHOP</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="amazon-header">
+        <a href="Html.html" class="logo">MASKRIDER SHOP</a>
+
+        <div class="search-bar">
+            <select>
+                <option>ทุกหมวดหมู่</option>
+                <option>อิเล็กทรอนิกส์</option>
+                <option>เสื้อผ้า</option>
+                <option>หนังสือ</option>
+                <option>บ้านและสวน</option>
+            </select>
+            <input type="text" placeholder="ค้นหาสินค้า...">
+            <button>🔍 ค้นหา</button>
+        </div>
+
+        <div class="header-links">
+            <a id="accountLink" href="login.html">👤 บัญชีของฉัน</a>
+            <a id="logoutLink" href="#" style="display:none;">ออกจากระบบ</a>
+            <a href="Html.html">🛒 ตะกร้าสินค้า</a>
+            <a href="favorites.html">❤️ รายการโปรด (<span id="favoritesCount">0</span>)</a>
+            <a id="adminLink" class="admin-link" href="#" onclick="toggleAdmin()">🔐 Admin<span id="adminBadge" class="admin-badge" style="display:none;">ON</span></a>
+        </div>
+    </header>
+
+    <nav>
+        <ul class="head-menu">
+            <li><a href="Html.html">หน้าแรก</a></li>
+            <li><a href="about.html">เกี่ยวกับเรา</a></li>
+            <li><a href="services.html">บริการ</a></li>
+            <li><a href="contact.html">ติดต่อเรา</a></li>
+        </ul>
+    </nav>
+
+    <main class="product-detail-page">
+        <div class="product-detail-topbar">
+            <button class="back-btn" type="button" onclick="goBack()">← ย้อนกลับ</button>
+        </div>
+
+        <section class="product-detail" aria-live="polite">
+            <div class="product-detail-media">
+                <div class="product-detail-image" id="detailImageWrap">
+                    <img id="detailImage" src="" alt="">
+                </div>
+
+                <div class="product-detail-video" id="detailVideoWrap" style="display: none;">
+                    <video id="detailVideo" controls playsinline>
+                        <source id="detailVideoSource" src="" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <div class="product-detail-info">
+                <h1 id="detailTitle" class="product-detail-title"></h1>
+                <div id="detailPrice" class="product-detail-price"></div>
+                <div id="detailStock" class="product-stock"></div>
+                <div id="detailAdminRestock" class="admin-restock">
+                    <span class="admin-restock-label">เติมสต๊อก (แอดมิน)</span>
+                    <div class="admin-restock-row">
+                        <input id="restockInput" class="admin-restock-input" type="number" min="1" step="1" value="1" inputmode="numeric">
+                        <button class="admin-restock-btn" type="button" onclick="restockCurrentProduct()">เติม</button>
+                    </div>
+                </div>
+                <div id="detailDescription" class="product-detail-desc"></div>
+
+                <div class="product-detail-actions">
+                    <button class="buy-button" type="button" onclick="goBack()">กลับไปเลือกสินค้า</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="product-review" id="reviewSection" style="display: none;">
+            <h2 class="product-review-title">รีวิวสินค้า</h2>
+
+            <form id="reviewForm" class="review-form">
+                <div class="review-field">
+                    <label for="reviewName">ชื่อ</label>
+                    <input id="reviewName" name="name" type="text" placeholder="ชื่อของคุณ" required>
+                </div>
+
+                <div class="review-field">
+                    <label for="reviewText">รีวิว</label>
+                    <textarea id="reviewText" name="text" rows="4" placeholder="เขียนรีวิวก่อนสั่งซื้อ..." required></textarea>
+                </div>
+
+                <button class="checkout-btn" type="submit">เพิ่มรีวิว</button>
+                <div id="reviewStatus" class="review-status"></div>
+            </form>
+
+            <div id="reviewList" class="review-list"></div>
+        </section>
+
+        <section class="product-detail-notfound" id="notFound" style="display: none;">
+            <h2>ไม่พบสินค้า</h2>
+            <p>กรุณากลับไปเลือกสินค้าใหม่</p>
+            <button class="back-btn" type="button" onclick="location.href='Html.html'">← กลับหน้าแรก</button>
+        </section>
+    </main>
+
+    <script src="auth.js"></script>
+    <script src="favorites.js"></script>
+    <script>
+        const productData = {
+            'bandai-kamen-rider-gavv-dx-gavv-driver': {
+                title: 'Bandai Kamen Rider Gavv DX Gavv Driver Henshin Belt',
+                price: '฿1,200',
+                image: 's-l1200.jpg',
+                video: 'video/gavv.mp4',
+                description: 'เข็มขัดแปลงร่างรุ่น DX จาก MASKRIDER สามารถเพิ่มรายละเอียดสินค้าเพิ่มเติมได้ตามต้องการ เช่น วัสดุ ขนาด วิธีใช้งาน และสิ่งที่ได้รับในกล่อง'
+            },
+            'kamen-rider-wizard-mini-driver': {
+                title: 'Kamen Rider Wizard Mini Wizard Driver Belt',
+                price: '฿550',
+                image: 's-l1200 (1).jpg',
+                video: 'video/videoplayback.mp4',
+                description: 'เข็มขัดแปลงร่างรุ่น Mini สำหรับ Kamen Rider Wizard เพิ่มรายละเอียดสินค้าเพิ่มเติมได้ตามต้องการ'
+            },
+            'Kamen Rider Build / DX Build Driver': {
+                title: 'Kamen Rider Build / DX Build Driver',
+                price: '฿1,500',
+                image: 'th-11134207-81zto-mhim18g3z9xfd4.jfif',
+                video: 'video/[Omamori][Lyrics + Engsub] Be The One - PANDORA - Kamen Rider Build Opening.mp4',
+                description: 'เข็มขัด DX Build Driver เพิ่มรายละเอียดสินค้าเพิ่มเติมได้ตามต้องการ'
+            },
+            'HENSHIN BELT DX ZEZTZ DRIVER': {
+                title: 'HENSHIN BELT DX ZEZTZ DRIVER',
+                price: '฿2,300',
+                image: '37990_300x300_nocrop.jpg',
+                video: 'video/zezt.mp4',
+                description: 'เข็มขัด DX ZEZTZ เพิ่มรายละเอียดสินค้าเพิ่มเติมได้ตามต้องการ'
+            },
+            'samsung-galaxy-s24-ultra': {
+                title: 'Samsung Galaxy S24 Ultra',
+                price: '฿34,999',
+                image: 'https://via.placeholder.com/800x600/4CAF50/FFFFFF?text=Samsung+Galaxy+S24',
+                video: 'video/bg.mp4',
+                description: 'สมาร์ทโฟนเรือธง เพิ่มรายละเอียดสินค้าเพิ่มเติมได้ตามต้องการ'
+            },
+            'dell-xps-15': {
+                title: 'Dell XPS 15',
+                price: '฿52,999',
+                image: 'https://via.placeholder.com/800x600/2196F3/FFFFFF?text=Dell+XPS+15',
+                video: 'video/bg.mp4',
+                description: 'โน้ตบุ๊กพรีเมียม เพิ่มรายละเอียดสินค้าเพิ่มเติมได้ตามต้องการ'
+            },
+            'sony-wh-1000xm5': {
+                title: 'Sony WH-1000XM5',
+                price: '฿12,999',
+                image: 'https://via.placeholder.com/800x600/FF9800/FFFFFF?text=Sony+WH-1000XM5',
+                video: 'video/bg.mp4',
+                description: 'หูฟังตัดเสียงรบกวน เพิ่มรายละเอียดสินค้าเพิ่มเติมได้ตามต้องการ'
+            },
+            'garmin-fenix-7': {
+                title: 'Garmin Fenix 7',
+                price: '฿18,999',
+                image: 'https://via.placeholder.com/800x600/9C27B0/FFFFFF?text=Garmin+Fenix+7',
+                video: 'video/bg.mp4',
+                description: 'สมาร์ทวอทช์สายกีฬา เพิ่มรายละเอียดสินค้าเพิ่มเติมได้ตามต้องการ'
+            },
+            'canon-eos-r6': {
+                title: 'Canon EOS R6',
+                price: '฿58,999',
+                image: 'https://via.placeholder.com/800x600/F44336/FFFFFF?text=Canon+EOS+R6',
+                video: 'video/bg.mp4',
+                description: 'กล้อง Mirrorless เพิ่มรายละเอียดสินค้าเพิ่มเติมได้ตามต้องการ'
+            },
+            'xbox-series-x': {
+                title: 'Xbox Series X',
+                price: '฿14,999',
+                image: 'https://via.placeholder.com/800x600/00BCD4/FFFFFF?text=Xbox+Series+X',
+                video: 'video/bg.mp4',
+                description: 'เครื่องเล่นเกมคอนโซล เพิ่มรายละเอียดสินค้าเพิ่มเติมได้ตามต้องการ'
+            },
+            'lg-ultragear-27': {
+                title: 'LG UltraGear 27"',
+                price: '฿9,999',
+                image: 'https://via.placeholder.com/800x600/795548/FFFFFF?text=LG+UltraGear+27',
+                video: 'video/bg.mp4',
+                description: 'จอเกมมิ่ง เพิ่มรายละเอียดสินค้าเพิ่มเติมได้ตามต้องการ'
+            },
+            'keychron-k2': {
+                title: 'Keychron K2',
+                price: '฿2,999',
+                image: 'https://via.placeholder.com/800x600/607D8B/FFFFFF?text=Keychron+K2',
+                video: 'video/bg.mp4',
+                description: 'คีย์บอร์ด Mechanical เพิ่มรายละเอียดสินค้าเพิ่มเติมได้ตามต้องการ'
+            }
+        };
+
+        const stockDefaults = {
+            'bandai-kamen-rider-gavv-dx-gavv-driver': 5,
+            'kamen-rider-wizard-mini-driver': 5,
+            'Kamen Rider Build / DX Build Driver': 5,
+            'HENSHIN BELT DX ZEZTZ DRIVER': 5,
+            'sony-a7-iv': 2,
+            'playstation-5': 3
+        };
+
+        function getStockKey(productId) {
+            return 'stock:' + productId;
+        }
+
+        function ensureStockInitialized(productId) {
+            const key = getStockKey(productId);
+            const existing = localStorage.getItem(key);
+            if (existing !== null) return;
+            const initial = Object.prototype.hasOwnProperty.call(stockDefaults, productId) ? stockDefaults[productId] : 10;
+            localStorage.setItem(key, String(initial));
+        }
+
+        function getStock(productId) {
+            ensureStockInitialized(productId);
+            const raw = localStorage.getItem(getStockKey(productId));
+            const num = parseInt(raw || '0', 10);
+            return Number.isFinite(num) ? Math.max(0, num) : 0;
+        }
+
+        function setStock(productId, value) {
+            localStorage.setItem(getStockKey(productId), String(Math.max(0, value)));
+        }
+
+        const ADMIN_SESSION_KEY = 'admin:isLoggedIn';
+
+        function isAdmin() {
+            return localStorage.getItem(ADMIN_SESSION_KEY) === '1';
+        }
+
+        function setAdmin(value) {
+            localStorage.setItem(ADMIN_SESSION_KEY, value ? '1' : '0');
+        }
+
+        function updateAdminUI() {
+            const badge = document.getElementById('adminBadge');
+            if (badge) badge.style.display = isAdmin() ? 'inline-block' : 'none';
+
+            const restockEl = document.getElementById('detailAdminRestock');
+            if (restockEl) restockEl.style.display = isAdmin() ? 'block' : 'none';
+        }
+
+        function toggleAdmin() {
+            if (isAdmin()) {
+                const ok = confirm('ออกจากโหมดแอดมิน?');
+                if (!ok) return;
+                setAdmin(false);
+                updateAdminUI();
+                return;
+            }
+
+            if (!window.auth || !window.auth.isAdminUser || !window.auth.isAdminUser()) {
+                alert('เฉพาะบัญชี admin เท่านั้น');
+                return;
+            }
+
+            const pass = prompt('ใส่รหัสผ่าน admin');
+            if (pass === null) return;
+            if (window.auth.verifyCurrentUserPassword && window.auth.verifyCurrentUserPassword(String(pass))) {
+                setAdmin(true);
+                updateAdminUI();
+                alert('เข้าสู่โหมดแอดมินแล้ว');
+            } else {
+                alert('รหัสผ่านไม่ถูกต้อง');
+            }
+        }
+
+        function updateStockDisplay(productId) {
+            const stockEl = document.getElementById('detailStock');
+            if (!stockEl) return;
+            const stock = getStock(productId);
+            if (stock <= 0) {
+                stockEl.textContent = 'Sold Out';
+                stockEl.classList.add('is-soldout');
+            } else {
+                stockEl.textContent = 'คงเหลือ: ' + stock;
+                stockEl.classList.remove('is-soldout');
+            }
+        }
+
+        function restockCurrentProduct() {
+            if (!isAdmin()) {
+                alert('เฉพาะแอดมินเท่านั้น');
+                return;
+            }
+
+            const productId = getProductId();
+            if (!productId) return;
+            const input = document.getElementById('restockInput');
+            const add = parseInt((input && input.value) ? input.value : '0', 10);
+            if (!Number.isFinite(add) || add <= 0) {
+                alert('กรุณาใส่จำนวนที่ถูกต้อง');
+                return;
+            }
+
+            const current = getStock(productId);
+            setStock(productId, current + add);
+            updateStockDisplay(productId);
+            alert('เติมสต๊อกเรียบร้อย');
+        }
+
+        function goBack() {
+            if (history.length > 1) {
+                history.back();
+                return;
+            }
+            location.href = 'Html.html';
+        }
+
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        function getProductId() {
+            const params = new URLSearchParams(location.search);
+            return params.get('id') || '';
+        }
+
+        function getReviewKey(productId) {
+            return 'reviews:' + productId;
+        }
+
+        function loadReviews(productId) {
+            try {
+                const raw = localStorage.getItem(getReviewKey(productId));
+                const arr = raw ? JSON.parse(raw) : [];
+                return Array.isArray(arr) ? arr : [];
+            } catch {
+                return [];
+            }
+        }
+
+        function saveReviews(productId, reviews) {
+            localStorage.setItem(getReviewKey(productId), JSON.stringify(reviews));
+        }
+
+        function renderReviews(productId) {
+            const listEl = document.getElementById('reviewList');
+            if (!listEl) return;
+
+            const reviews = loadReviews(productId);
+            if (reviews.length === 0) {
+                listEl.innerHTML = '<div class="review-empty">ยังไม่มีรีวิว</div>';
+                return;
+            }
+
+            listEl.innerHTML = reviews
+                .slice()
+                .reverse()
+                .map(r => {
+                    return (
+                        '<div class="review-item">' +
+                        '<div class="review-meta">' +
+                        '<strong>' + escapeHtml(r.name) + '</strong>' +
+                        '<span>' + escapeHtml(r.date) + '</span>' +
+                        '</div>' +
+                        '<div class="review-text">' + escapeHtml(r.text) + '</div>' +
+                        '</div>'
+                    );
+                })
+                .join('');
+        }
+
+        function setStatus(message, type) {
+            const el = document.getElementById('reviewStatus');
+            if (!el) return;
+            el.textContent = message || '';
+            el.style.color = type === 'success' ? '#2e7d32' : type === 'error' ? '#c62828' : '#333';
+        }
+
+        function initPage() {
+            const productId = getProductId();
+            const product = productData[productId];
+
+            const detailSection = document.querySelector('.product-detail');
+            const notFound = document.getElementById('notFound');
+            const reviewSection = document.getElementById('reviewSection');
+
+            if (!product) {
+                if (detailSection) detailSection.style.display = 'none';
+                if (reviewSection) reviewSection.style.display = 'none';
+                if (notFound) notFound.style.display = 'block';
+                return;
+            }
+
+            document.getElementById('detailTitle').textContent = product.title;
+            document.getElementById('detailPrice').textContent = product.price;
+            document.getElementById('detailDescription').textContent = product.description;
+
+            updateStockDisplay(productId);
+            updateAdminUI();
+
+            const imgEl = document.getElementById('detailImage');
+            imgEl.src = product.image;
+            imgEl.alt = product.title;
+
+            const videoWrap = document.getElementById('detailVideoWrap');
+            const videoEl = document.getElementById('detailVideo');
+            const videoSourceEl = document.getElementById('detailVideoSource');
+
+            if (product.video) {
+                videoSourceEl.src = product.video;
+                videoEl.load();
+                videoWrap.style.display = 'block';
+            }
+
+            if (reviewSection) reviewSection.style.display = 'block';
+            renderReviews(productId);
+
+            const form = document.getElementById('reviewForm');
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const name = String(document.getElementById('reviewName').value || '').trim();
+                const text = String(document.getElementById('reviewText').value || '').trim();
+
+                if (!name || !text) {
+                    setStatus('กรุณากรอกข้อมูลให้ครบ', 'error');
+                    return;
+                }
+
+                const reviews = loadReviews(productId);
+                reviews.push({
+                    name,
+                    text,
+                    date: new Date().toLocaleString()
+                });
+
+                saveReviews(productId, reviews);
+                form.reset();
+                setStatus('เพิ่มรีวิวเรียบร้อยแล้ว', 'success');
+                renderReviews(productId);
+
+                setTimeout(() => {
+                    setStatus('', 'info');
+                }, 2000);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', initPage);
+    </script>
+</body>
+</html>

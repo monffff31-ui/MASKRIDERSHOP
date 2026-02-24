@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ติดต่อเรา - ShopNow</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Amazon-style Header -->
+    <header class="amazon-header">
+        <a href="Html.html" class="logo">MASKRIDER SHOP</a>
+        
+        <div class="search-bar">
+            <select>
+                <option>ทุกหมวดหมู่</option>
+                <option>อิเล็กทรอนิกส์</option>
+                <option>เสื้อผ้า</option>
+                <option>หนังสือ</option>
+                <option>บ้านและสวน</option>
+            </select>
+            <input type="text" placeholder="ค้นหาสินค้า...">
+            <button>🔍 ค้นหา</button>
+        </div>
+        
+        <div class="header-links">
+            <a id="accountLink" href="login.html">👤 บัญชีของฉัน</a>
+            <a id="logoutLink" href="#" style="display:none;">ออกจากระบบ</a>
+            <a href="#">🛒 ตะกร้าสินค้า</a>
+            <a href="favorites.html">❤️ รายการโปรด (<span id="favoritesCount">0</span>)</a>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <ul class="head-menu">
+            <li><a href="Html.html">หน้าแรก</a></li>
+            <li><a href="about.html">เกี่ยวกับเรา</a></li>
+            <li><a href="services.html">บริการ</a></li>
+            <li><a href="contact.html" class="active">ติดต่อเรา</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Contact Section -->
+    <section style="padding: 60px 20px; max-width: 1200px; margin: 0 auto;">
+        <h1 style="font-size: 36px; margin-bottom: 30px; color: #131921;">ติดต่อเรา</h1>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+            <!-- Contact Information -->
+            <div style="background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <h2 style="color: #131921; margin-bottom: 30px;">📞 ข้อมูลติดต่อ</h2>
+                
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #131921; margin-bottom: 10px;">🏢 สำนักงานใหญ่</h3>
+                    <p style="line-height: 1.6; margin-bottom: 5px;">ShopNow Thailand</p>
+                    <p style="line-height: 1.6; margin-bottom: 5px;">123 ถนนสุขุมวิท แขวงคลองตันเหนือ</p>
+                    <p style="line-height: 1.6; margin-bottom: 5px;">เขตวัฒนา กรุงเทพมหานคร 10110</p>
+                </div>
+                
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #131921; margin-bottom: 10px;">📱 โทรศัพท์</h3>
+                    <p style="line-height: 1.6;">ศูนย์บริการลูกค้า: 02-123-4567</p>
+                    <p style="line-height: 1.6;">ออเดอร์และการจัดส่ง: 02-987-6543</p>
+                    <p style="line-height: 1.6;">Line: @shopnowth</p>
+                </div>
+                
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #131921; margin-bottom: 10px;">📧 อีเมล</h3>
+                    <p style="line-height: 1.6;">ศูนย์บริการลูกค้า: support@shopnow.co.th</p>
+                    <p style="line-height: 1.6;">ความร่วมมือทางธุรกิจ: business@shopnow.co.th</p>
+                </div>
+                
+                <div>
+                    <h3 style="color: #131921; margin-bottom: 10px;">⏰ เวลาทำการ</h3>
+                    <p style="line-height: 1.6;">จันทร์ - ศุกร์: 8:00 - 20:00</p>
+                    <p style="line-height: 1.6;">เสาร์ - อาทิตย์: 9:00 - 18:00</p>
+                </div>
+            </div>
+            
+            <!-- Contact Form -->
+            <div style="background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <h2 style="color: #131921; margin-bottom: 30px;">📝 ฟอร์มติดต่อ</h2>
+                
+                <form id="contactForm">
+                    <div style="margin-bottom: 20px;">
+                        <label for="name" style="display: block; margin-bottom: 5px; color: #131921;">ชื่อ-นามสกุล *</label>
+                        <input type="text" id="name" name="name" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label for="email" style="display: block; margin-bottom: 5px; color: #131921;">อีเมล *</label>
+                        <input type="email" id="email" name="email" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label for="phone" style="display: block; margin-bottom: 5px; color: #131921;">เบอร์โทรศัพท์</label>
+                        <input type="tel" id="phone" name="phone" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label for="subject" style="display: block; margin-bottom: 5px; color: #131921;">หัวข้อ *</label>
+                        <select id="subject" name="subject" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                            <option value="">เลือกหัวข้อ</option>
+                            <option value="order">สอบถามเรื่องออเดอร์</option>
+                            <option value="product">สอบถามเรื่องสินค้า</option>
+                            <option value="return">เรื่องการคืนสินค้า</option>
+                            <option value="payment">เรื่องการชำระเงิน</option>
+                            <option value="other">อื่นๆ</option>
+                        </select>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label for="message" style="display: block; margin-bottom: 5px; color: #131921;">ข้อความ *</label>
+                        <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; resize: vertical;"></textarea>
+                    </div>
+                    
+                    <button type="submit" style="background-color: #ff9900; color: white; padding: 12px 30px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; width: 100%;">
+                        ส่งข้อความ
+                    </button>
+
+                    <div id="contactStatus" style="margin-top: 12px; font-size: 14px;"></div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- FAQ Section -->
+        <div style="background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+            <h2 style="color: #131921; margin-bottom: 30px;">❓ คำถามที่พบบ่อย</h2>
+            
+            <div style="margin-bottom: 20px;">
+                <h3 style="color: #131921; margin-bottom: 10px;">การจัดส่งใช้เวลานานแค่ไหน?</h3>
+                <p style="line-height: 1.6;">สำหรับพื้นที่กรุงเทพและปริมณฑล จัดส่งภายใน 1-2 วันทำการ สำหรับต่างจังหวัด 3-5 วันทำการ</p>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <h3 style="color: #131921; margin-bottom: 10px;">สามารถคืนสินค้าได้หรือไม่?</h3>
+                <p style="line-height: 1.6;">สามารถคืนสินค้าได้ภายใน 7 วัน หากสินค้ายังอยู่ในสภาพสมบูรณ์และมีบรรจุภัณฑ์ครบ</p>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <h3 style="color: #131921; margin-bottom: 10px;">มีวิธีการชำระเงินอะไรบ้าง?</h3>
+                <p style="line-height: 1.6;">รับชำระเงินผ่านบัตรเครดิต, พร้อมเพย์, โอนเงินผ่านธนาคาร, และเก็บเงินปลายทาง</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>เกี่ยวกับเรา</h3>
+                <ul>
+                    <li><a href="#">ประวัติบริษัท</a></li>
+                    <li><a href="#">ทีมงาน</a></li>
+                    <li><a href="#">ร่วมงานกับเรา</a></li>
+                    <li><a href="#">ข่าวสาร</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>บริการลูกค้า</h3>
+                <ul>
+                    <li><a href="#">ศูนย์ช่วยเหลือ</a></li>
+                    <li><a href="#">การจัดส่ง</a></li>
+                    <li><a href="#">การคืนสินค้า</a></li>
+                    <li><a href="#">ติดต่อเรา</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>หมวดหมู่สินค้า</h3>
+                <ul>
+                    <li><a href="#">อิเล็กทรอนิกส์</a></li>
+                    <li><a href="#">เสื้อผ้า</a></li>
+                    <li><a href="#">หนังสือ</a></li>
+                    <li><a href="#">บ้านและสวน</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>ติดตามเรา</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="favorites.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        (function () {
+            const form = document.getElementById('contactForm');
+            if (!form) return;
+
+            const statusEl = document.getElementById('contactStatus');
+            const submitBtn = form.querySelector('button[type="submit"]');
+
+            const WEBHOOK_URL = 'https://discord.com/api/webhooks/1475555645087416590/c3jlxyDdyvEGBSaYjOsFePH05RAEJ85AJjkFgFleZn8Lwb4ufr5CDjwFy16zcq9Mp0B5';
+
+            function setStatus(message, type) {
+                if (!statusEl) return;
+                statusEl.textContent = message;
+                statusEl.style.color = type === 'success' ? '#2e7d32' : type === 'error' ? '#c62828' : '#333';
+            }
+
+            function formatSubject(value) {
+                const map = {
+                    order: 'สอบถามเรื่องออเดอร์',
+                    product: 'สอบถามเรื่องสินค้า',
+                    return: 'เรื่องการคืนสินค้า',
+                    payment: 'เรื่องการชำระเงิน',
+                    other: 'อื่นๆ',
+                };
+                return map[value] || value || '-';
+            }
+
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                if (!WEBHOOK_URL) {
+                    setStatus('ยังไม่ได้ตั้งค่า Discord Webhook URL (แก้ค่า WEBHOOK_URL ในไฟล์ contact.html ก่อน)', 'error');
+                    return;
+                }
+
+                const formData = new FormData(form);
+                const name = String(formData.get('name') || '').trim();
+                const email = String(formData.get('email') || '').trim();
+                const phone = String(formData.get('phone') || '').trim();
+                const subject = String(formData.get('subject') || '').trim();
+                const message = String(formData.get('message') || '').trim();
+
+                const content = [
+                    '📩 มีข้อความติดต่อใหม่',
+                    `ชื่อ: ${name || '-'}`,
+                    `อีเมล: ${email || '-'}`,
+                    `เบอร์โทร: ${phone || '-'}`,
+                    `หัวข้อ: ${formatSubject(subject)}`,
+                    'ข้อความ:',
+                    message || '-',
+                ].join('\n');
+
+                if (submitBtn) submitBtn.disabled = true;
+                setStatus('กำลังส่งข้อความ...', 'info');
+
+                try {
+                    const res = await fetch(WEBHOOK_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ content }),
+                    });
+
+                    if (!res.ok) {
+                        throw new Error('HTTP ' + res.status);
+                    }
+
+                    form.reset();
+                    setStatus('ส่งข้อความเรียบร้อยแล้ว', 'success');
+                } catch (err) {
+                    setStatus('ส่งไม่สำเร็จ (อาจติด CORS หรือ webhook ผิด): ' + (err && err.message ? err.message : String(err)), 'error');
+                } finally {
+                    if (submitBtn) submitBtn.disabled = false;
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

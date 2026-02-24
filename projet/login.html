@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เข้าสู่ระบบ - MASKRIDER SHOP</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="auth.js"></script>
+    <script src="excelExport.js"></script>
+</head>
+<body>
+    <main class="auth-page">
+        <section class="auth-card">
+            <h1 class="auth-title">เข้าสู่ระบบ</h1>
+
+            <form id="loginForm" class="auth-form">
+                <div class="auth-field">
+                    <label for="username">ชื่อผู้ใช้</label>
+                    <input id="username" name="username" type="text" autocomplete="username" required>
+                </div>
+
+                <div class="auth-field">
+                    <label for="password">รหัสผ่าน</label>
+                    <input id="password" name="password" type="password" autocomplete="current-password" required>
+                </div>
+
+                <button class="checkout-btn" type="submit">เข้าสู่ระบบ</button>
+                <div id="loginStatus" class="auth-status"></div>
+            </form>
+
+            <div class="auth-footer">
+                <span>ยังไม่มีบัญชี?</span>
+                <a class="auth-link" href="register.html">ลงทะเบียน</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        (function () {
+            const form = document.getElementById('loginForm');
+            const statusEl = document.getElementById('loginStatus');
+            if (!form) return;
+
+            function setStatus(message, type) {
+                if (!statusEl) return;
+                statusEl.textContent = message;
+                statusEl.style.color = type === 'success' ? '#2e7d32' : type === 'error' ? '#c62828' : '#333';
+            }
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const fd = new FormData(form);
+                const username = String(fd.get('username') || '').trim();
+                const password = String(fd.get('password') || '');
+
+                const result = window.auth.login(username, password);
+                if (!result.ok) {
+                    setStatus(result.message || 'เข้าสู่ระบบไม่สำเร็จ', 'error');
+                    return;
+                }
+
+                setStatus('เข้าสู่ระบบสำเร็จ', 'success');
+
+                const returnUrl = window.auth.getReturnUrl();
+                location.href = returnUrl ? returnUrl : 'Html.html';
+            });
+        })();
+    </script>
+</body>
+</html>

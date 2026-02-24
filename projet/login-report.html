@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายงานการเข้าสู่ระบบ - MASKRIDER SHOP</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="auth.js"></script>
+    <script src="excelExport.js"></script>
+    <style>
+        .report-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .report-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .report-actions {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-export {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .btn-export:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+        
+        .btn-refresh {
+            background: #2196F3;
+            color: white;
+        }
+        
+        .btn-refresh:hover {
+            background: #1976D2;
+            transform: translateY(-2px);
+        }
+        
+        .btn-back {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-back:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        .login-log-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .login-log-table th,
+        .login-log-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .login-log-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .login-log-table tbody tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .success {
+            color: #28a745;
+            font-weight: 500;
+        }
+        
+        .error {
+            color: #dc3545;
+            font-weight: 500;
+        }
+        
+        .log-note {
+            text-align: center;
+            color: #666;
+            margin-top: 15px;
+            font-style: italic;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="report-container">
+        <header class="report-header">
+            <h1>📊 รายงานการเข้าสู่ระบบ</h1>
+            <p>MASKRIDER SHOP - ระบบติดตามการเข้าใช้งาน</p>
+        </header>
+        
+        <div class="stats-grid" id="statsGrid">
+            <!-- Stats will be populated by JavaScript -->
+        </div>
+        
+        <div class="report-actions">
+            <button class="btn btn-export" onclick="exportToExcel()">
+                📥 ส่งออกข้อมูล (Excel)
+            </button>
+            <button class="btn btn-refresh" onclick="refreshData()">
+                🔄 รีเฟรชข้อมูล
+            </button>
+            <a href="Html.html" class="btn btn-back">
+                🔙 กลับหน้าหลัก
+            </a>
+        </div>
+        
+        <div id="loginLogContainer">
+            <div class="no-data">กำลังโหลดข้อมูล...</div>
+        </div>
+    </div>
+    
+    <script>
+        function exportToExcel() {
+            if (typeof window.excelExport !== 'undefined') {
+                window.excelExport.exportToExcel();
+            } else {
+                alert('ไม่สามารถโหลดฟังก์ชันส่งออกข้อมูลได้');
+            }
+        }
+        
+        function refreshData() {
+            displayData();
+        }
+        
+        function calculateStats() {
+            if (typeof window.excelExport === 'undefined') return null;
+            
+            const log = window.excelExport.loadLoginLog();
+            const total = log.length;
+            const successful = log.filter(entry => entry.success).length;
+            const failed = total - successful;
+            
+            // Get unique users
+            const uniqueUsers = new Set(log.map(entry => entry.username)).size;
+            
+            // Get today's logins
+            const today = new Date().toLocaleDateString('th-TH');
+            const todayLogins = log.filter(entry => entry.date === today).length;
+            
+            return {
+                total,
+                successful,
+                failed,
+                uniqueUsers,
+                todayLogins,
+                successRate: total > 0 ? ((successful / total) * 100).toFixed(1) : 0
+            };
+        }
+        
+        function displayStats() {
+            const stats = calculateStats();
+            const container = document.getElementById('statsGrid');
+            
+            if (!stats) {
+                container.innerHTML = '<div class="no-data">ไม่สามารถโหลดสถิติได้</div>';
+                return;
+            }
+            
+            container.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-number">${stats.total}</div>
+                    <div class="stat-label">การเข้าสู่ระบบทั้งหมด</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.successful}</div>
+                    <div class="stat-label">เข้าสู่ระบบสำเร็จ</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.failed}</div>
+                    <div class="stat-label">เข้าสู่ระบบไม่สำเร็จ</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.uniqueUsers}</div>
+                    <div class="stat-label">ผู้ใช้ทั้งหมด</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.todayLogins}</div>
+                    <div class="stat-label">เข้าสู่ระบบวันนี้</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.successRate}%</div>
+                    <div class="stat-label">อัตราความสำเร็จ</div>
+                </div>
+            `;
+        }
+        
+        function displayData() {
+            displayStats();
+            
+            if (typeof window.excelExport !== 'undefined') {
+                window.excelExport.displayLoginLog();
+            } else {
+                document.getElementById('loginLogContainer').innerHTML = 
+                    '<div class="no-data">ไม่สามารถโหลดข้อมูลการเข้าสู่ระบบได้</div>';
+            }
+        }
+        
+        // Check if user is admin and logged in
+        function checkAccess() {
+            if (typeof window.auth !== 'undefined') {
+                const user = window.auth.getCurrentUser();
+                if (!user || !user.isAdmin) {
+                    alert('คุณไม่มีสิทธิ์เข้าถึงหน้านี้ ต้องการสิทธิ์ผู้ดูแลระบบ');
+                    window.location.href = 'login.html';
+                    return;
+                }
+            } else {
+                alert('ไม่สามารถโหลดระบบตรวจสอบสิทธิ์ได้');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Load data when page is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', displayData);
+            } else {
+                displayData();
+            }
+        }
+        
+        checkAccess();
+    </script>
+</body>
+</html>

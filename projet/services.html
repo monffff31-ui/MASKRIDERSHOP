@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>บริการ - ShopNow</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Amazon-style Header -->
+    <header class="amazon-header">
+        <a href="Html.html" class="logo">MASKRIDER SHOP</a>
+        
+        <div class="search-bar">
+            <select>
+                <option>ทุกหมวดหมู่</option>
+                <option>อิเล็กทรอนิกส์</option>
+                <option>เสื้อผ้า</option>
+                <option>หนังสือ</option>
+                <option>บ้านและสวน</option>
+            </select>
+            <input type="text" placeholder="ค้นหาสินค้า...">
+            <button>🔍 ค้นหา</button>
+        </div>
+        
+        <div class="header-links">
+            <a id="accountLink" href="login.html">👤 บัญชีของฉัน</a>
+            <a id="logoutLink" href="#" style="display:none;">ออกจากระบบ</a>
+            <a href="#">🛒 ตะกร้าสินค้า</a>
+            <a href="favorites.html">❤️ รายการโปรด (<span id="favoritesCount">0</span>)</a>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <ul class="head-menu">
+            <li><a href="Html.html">หน้าแรก</a></li>
+            <li><a href="about.html">เกี่ยวกับเรา</a></li>
+            <li><a href="services.html" class="active">บริการ</a></li>
+            <li><a href="contact.html">ติดต่อเรา</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Services Section -->
+    <section style="padding: 60px 20px; max-width: 1200px; margin: 0 auto;">
+        <h1 style="font-size: 36px; margin-bottom: 30px; color: #131921;">บริการของเรา</h1>
+        
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">🚚 การจัดส่ง</div>
+                <h3 class="product-title">จัดส่งด่วนทั่วประเทศ</h3>
+                <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                <div class="product-price">ฟรี!</div>
+                <button class="buy-button">ดูรายละเอียด</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">🔄 การคืนสินค้า</div>
+                <h3 class="product-title">คืนสินค้าง่ายๆ</h3>
+                <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                <div class="product-price">7 วัน</div>
+                <button class="buy-button">ดูรายละเอียด</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">💳 การชำระเงิน</div>
+                <h3 class="product-title">ชำระเงินหลายช่องทาง</h3>
+                <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                <div class="product-price">ปลอดภัย</div>
+                <button class="buy-button">ดูรายละเอียด</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">🛡️ ประกันสินค้า</div>
+                <h3 class="product-title">ประกันคุณภาพ</h3>
+                <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                <div class="product-price">100%</div>
+                <button class="buy-button">ดูรายละเอียด</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">🎧 บริการลูกค้า</div>
+                <h3 class="product-title">ทีมงานพร้อมบริการ</h3>
+                <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                <div class="product-price">24/7</div>
+                <button class="buy-button">ดูรายละเอียด</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">🎁 ของแถมพิเศษ</div>
+                <h3 class="product-title">สมาชิกพิเศษ</h3>
+                <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                <div class="product-price">VIP</div>
+                <button class="buy-button">ดูรายละเอียด</button>
+            </div>
+        </div>
+        
+        <div style="background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-top: 40px;">
+            <h2 style="color: #131921; margin-bottom: 20px;">🌟 ทำไมต้อง ShopNow?</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+                <div>
+                    <h3 style="color: #131921; margin-bottom: 10px;">✅ สินค้าของแท้</h3>
+                    <p style="line-height: 1.6;">รับประกันสินค้าแท้ 100% จากผู้ผลิตและจัดจำหน่ายรายใหญ่</p>
+                </div>
+                <div>
+                    <h3 style="color: #131921; margin-bottom: 10px;">💰 ราคาดีที่สุด</h3>
+                    <p style="line-height: 1.6;">รับประกันราคาถูกกว่าที่อื่น หากพบราคาถูกกว่าคืนเงิน</p>
+                </div>
+                <div>
+                    <h3 style="color: #131921; margin-bottom: 10px;">🚀 จัดส่งเร็ว</h3>
+                    <p style="line-height: 1.6;">จัดส่งภายใน 24 ชั่วโมงในกรุงเทพและปริมณฑล</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>เกี่ยวกับเรา</h3>
+                <ul>
+                    <li><a href="#">ประวัติบริษัท</a></li>
+                    <li><a href="#">ทีมงาน</a></li>
+                    <li><a href="#">ร่วมงานกับเรา</a></li>
+                    <li><a href="#">ข่าวสาร</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>บริการลูกค้า</h3>
+                <ul>
+                    <li><a href="#">ศูนย์ช่วยเหลือ</a></li>
+                    <li><a href="#">การจัดส่ง</a></li>
+                    <li><a href="#">การคืนสินค้า</a></li>
+                    <li><a href="#">ติดต่อเรา</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>หมวดหมู่สินค้า</h3>
+                <ul>
+                    <li><a href="#">อิเล็กทรอนิกส์</a></li>
+                    <li><a href="#">เสื้อผ้า</a></li>
+                    <li><a href="#">หนังสือ</a></li>
+                    <li><a href="#">บ้านและสวน</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>ติดตามเรา</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="favorites.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>
