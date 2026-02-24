@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ร้านค้าออนไลน์ - ซื้อของออนไลน์ราคาถูก</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Amazon-style Header -->
+    <header class="amazon-header">
+        <a href="Html.html" class="logo">MASKRIDER SHOP</a>
+        
+        <div class="search-bar">
+            <select>
+                <option>ทุกหมวดหมู่</option>
+                <option>อิเล็กทรอนิกส์</option>
+                <option>เสื้อผ้า</option>
+                <option>หนังสือ</option>
+                <option>บ้านและสวน</option>
+            </select>
+            <input id="searchInput" type="text" placeholder="ค้นหาสินค้า...">
+            <button>🔍 ค้นหา</button>
+        </div>
+        
+        <div class="header-links">
+            <a id="accountLink" href="login.html">👤 บัญชีของฉัน</a>
+            <a id="logoutLink" href="#" style="display:none;">ออกจากระบบ</a>
+            <a href="#" onclick="openCartModal()">🛒 ตะกร้าสินค้า (<span id="cartCount">0</span>)</a>
+            <a href="favorites.html">❤️ รายการโปรด (<span id="favoritesCount">0</span>)</a>
+            <a id="adminReportLink" href="login-report.html" style="display:none;">📊 รายงานการเข้าสู่ระบบ</a>
+            <a id="adminLink" class="admin-link" href="#" onclick="toggleAdmin()">🔐 Admin<span id="adminBadge" class="admin-badge" style="display:none;">ON</span></a>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <ul class="head-menu">
+            <li><a href="Html.html" class="active">หน้าแรก</a></li>
+            <li><a href="about.html">เกี่ยวกับเรา</a></li>
+            <li><a href="services.html">บริการ</a></li>
+            <li><a href="contact.html">ติดต่อเรา</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 60px 20px; text-align: center;">
+        <h1 style="font-size: 36px; margin-bottom: 20px;">🎉 ลดราคาสูงสุด 70%</h1>
+        <p style="font-size: 18px; margin-bottom: 30px;">สินค้าคุณภาพ ราคาพิเศษ เฉพาะวันนี้!</p>
+        <button onclick="openPromoModal()" style="background-color: #ff9900; color: white; padding: 15px 30px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+            ช้อปเลย!
+        </button>
+    </section>
+    
+    <!-- Featured Products -->
+    <section style="padding: 40px 20px;">
+        <h2 style="text-align: center; margin-bottom: 30px; font-size: 28px;"> 🤩สินค้าทีเด็ด!🤩</h2>
+        
+        <div class="product-grid">
+            <div class="product-card" data-fav-id="bandai-kamen-rider-gavv-dx-gavv-driver" data-fav-title="Bandai Kamen Rider Gavv DX Gavv Driver Henshin Belt" data-fav-price="฿1,200" data-fav-image="s-l1200.jpg">
+                <div class="product-image" onclick="openImageModal('s-l1200.jpg', 'Bandai Kamen Rider Gavv DX Gavv Driver Henshin Belt')">
+                    <img src="s-l1200.jpg" alt="Bandai Kamen Rider Gavv DX Gavv Driver Henshin Belt" style="width: 100%; height: 100%; object-fit: cover;">
+                    <button class="view-image-btn" onclick="event.stopPropagation(); openImageModal('s-l1200.jpg', 'Bandai Kamen Rider Gavv DX Gavv Driver Henshin Belt')">👁️ ดูรูป</button>
+                </div>
+                <h3 class="product-title">Bandai Kamen Rider Gavv DX Gavv Driver Henshin Belt</h3>
+                <div class="product-rating">⭐⭐⭐⭐⭐ (245)</div>
+                <div class="product-price">฿1,200</div>
+                <div class="product-stock" data-stock-id="bandai-kamen-rider-gavv-dx-gavv-driver"></div>
+                <button class="buy-button" onclick="addToCartById('bandai-kamen-rider-gavv-dx-gavv-driver', 'Bandai Kamen Rider Gavv DX Gavv Driver Henshin Belt', 1200)">เพิ่มลงตะกร้า</button>
+                <div class="admin-restock" data-admin-restock-id="bandai-kamen-rider-gavv-dx-gavv-driver">
+                    <span class="admin-restock-label">เติมสต๊อก (แอดมิน)</span>
+                    <div class="admin-restock-row">
+                        <input class="admin-restock-input" type="number" min="1" step="1" value="1" inputmode="numeric">
+                        <button class="admin-restock-btn" type="button" onclick="restockFromCard(this)">เติม</button>
+                    </div>
+                </div>
+                <button class="details-button" type="button" onclick="location.href='product.html?id=' + encodeURIComponent(this.closest('.product-card').dataset.favId)">รายละเอียดสินค้า</button>
+                <button class="fav-button" type="button">❤️ เพิ่มรายการโปรด</button>
+            </div>
+            
+            <div class="product-card" data-fav-id="kamen-rider-wizard-mini-driver" data-fav-title="Kamen Rider Wizard Mini Wizard Driver Belt" data-fav-price="฿550" data-fav-image="s-l1200 (1).jpg">
+                <div class="product-image" onclick="openImageModal('s-l1200 (1).jpg', 'Kamen Rider Wizard Mini Wizard Driver Belt')">
+                    <img src="s-l1200 (1).jpg" alt="Kamen Rider Wizard Mini Wizard Driver Belt" style="width: 100%; height: 100%; object-fit: cover;">
+                    <button class="view-image-btn" onclick="event.stopPropagation(); openImageModal('s-l1200 (1).jpg', 'Kamen Rider Wizard Mini Wizard Driver Belt')">👁️ ดูรูป</button>
+                </div>
+                <h3 class="product-title">Kamen Rider Wizard Mini Wizard Driver Belt</h3>
+                <div class="product-rating">⭐⭐⭐⭐ (189)</div>
+                <div class="product-price">฿550</div>
+                <div class="product-stock" data-stock-id="kamen-rider-wizard-mini-driver"></div>
+                <button class="buy-button" onclick="addToCartById('kamen-rider-wizard-mini-driver', 'Kamen Rider Wizard Mini Wizard Driver Belt', 550)">เพิ่มลงตะกร้า</button>
+                <div class="admin-restock" data-admin-restock-id="kamen-rider-wizard-mini-driver">
+                    <span class="admin-restock-label">เติมสต๊อก (แอดมิน)</span>
+                    <div class="admin-restock-row">
+                        <input class="admin-restock-input" type="number" min="1" step="1" value="1" inputmode="numeric">
+                        <button class="admin-restock-btn" type="button" onclick="restockFromCard(this)">เติม</button>
+                    </div>
+                </div>
+                <button class="details-button" type="button" onclick="location.href='product.html?id=' + encodeURIComponent(this.closest('.product-card').dataset.favId)">รายละเอียดสินค้า</button>
+                <button class="fav-button" type="button">❤️ เพิ่มรายการโปรด</button>
+            </div>
+            
+            <div class="product-card" data-fav-id="Kamen Rider Build / DX Build Driver" data-fav-title="Kamen Rider Build / DX Build Driver" data-fav-price="฿1,500" data-fav-image="th-11134207-81zto-mhim18g3z9xfd4.jfif">
+                <div class="product-image" onclick="openImageModal('th-11134207-81zto-mhim18g3z9xfd4.jfif', 'Kamen Rider Build / DX Build Driver')">
+                    <img src="th-11134207-81zto-mhim18g3z9xfd4.jfif" alt="Kamen Rider Build / DX Build Driver" style="width: 100%; height: 100%; object-fit: cover;">
+                    <button class="view-image-btn" onclick="event.stopPropagation(); openImageModal('th-11134207-81zto-mhim18g3z9xfd4.jfif', 'Kamen Rider Build / DX Build Driver')">👁️ ดูรูป</button>
+                </div>
+                <h3 class="product-title">Kamen Rider Build / DX Build Driver</h3>
+                <div class="product-rating">⭐⭐⭐⭐ (156)</div>
+                <div class="product-price">฿1,500</div>
+                <div class="product-stock" data-stock-id="Kamen Rider Build / DX Build Driver"></div>
+                <button class="buy-button" onclick="addToCartById('Kamen Rider Build / DX Build Driver', 'Kamen Rider Build / DX Build Driver', 1500)">เพิ่มลงตะกร้า</button>
+                <div class="admin-restock" data-admin-restock-id="Kamen Rider Build / DX Build Driver">
+                    <span class="admin-restock-label">เติมสต๊อก (แอดมิน)</span>
+                    <div class="admin-restock-row">
+                        <input class="admin-restock-input" type="number" min="1" step="1" value="1" inputmode="numeric">
+                        <button class="admin-restock-btn" type="button" onclick="restockFromCard(this)">เติม</button>
+                    </div>
+                </div>
+                <button class="details-button" type="button" onclick="location.href='product.html?id=' + encodeURIComponent(this.closest('.product-card').dataset.favId)">รายละเอียดสินค้า</button>
+                <button class="fav-button" type="button">❤️ เพิ่มรายการโปรด</button>
+            </div>
+            
+            <div class="product-card" data-fav-id="HENSHIN BELT DX ZEZTZ DRIVER" data-fav-title="HENSHIN BELT DX ZEZTZ DRIVER" data-fav-price="฿2,300" data-fav-image="37990_300x300_nocrop.jpg">
+                <div class="product-image" onclick="openImageModal('37990_300x300_nocrop.jpg', 'HENSHIN BELT DX ZEZTZ DRIVER')">
+                    <img src="37990_300x300_nocrop.jpg" alt="HENSHIN BELT DX ZEZTZ DRIVER" style="width: 100%; height: 100%; object-fit: cover;">
+                    <button class="view-image-btn" onclick="event.stopPropagation(); openImageModal('37990_300x300_nocrop.jpg', 'HENSHIN BELT DX ZEZTZ DRIVER')">👁️ ดูรูป</button>
+                </div>
+                <h3 class="product-title">HENSHIN BELT DX ZEZTZ DRIVER</h3>
+                <div class="product-rating">⭐⭐⭐⭐ (312)</div>
+                <div class="product-price">฿2,300</div>
+                <div class="product-stock" data-stock-id="HENSHIN BELT DX ZEZTZ DRIVER"></div>
+                <button class="buy-button" onclick="addToCartById('HENSHIN BELT DX ZEZTZ DRIVER', 'HENSHIN BELT DX ZEZTZ DRIVER', 2300)">เพิ่มลงตะกร้า</button>
+                <div class="admin-restock" data-admin-restock-id="HENSHIN BELT DX ZEZTZ DRIVER">
+                    <span class="admin-restock-label">เติมสต๊อก (แอดมิน)</span>
+                    <div class="admin-restock-row">
+                        <input class="admin-restock-input" type="number" min="1" step="1" value="1" inputmode="numeric">
+                        <button class="admin-restock-btn" type="button" onclick="restockFromCard(this)">เติม</button>
+                    </div>
+                </div>
+                <button class="details-button" type="button" onclick="location.href='product.html?id=' + encodeURIComponent(this.closest('.product-card').dataset.favId)">รายละเอียดสินค้า</button>
+                <button class="fav-button" type="button">❤️ เพิ่มรายการโปรด</button>
+            </div>
+            
+            <div class="product-card" data-fav-id="sony-a7-iv" data-fav-title="Sony A7 IV" data-fav-price="฿68,999" data-fav-image="https://via.placeholder.com/250x200/F44336/FFFFFF?text=Sony+A7+IV">
+                <div class="product-image" onclick="openImageModal('https://via.placeholder.com/250x200/F44336/FFFFFF?text=Sony+A7+IV', 'Sony A7 IV')">
+                    <img src="https://via.placeholder.com/250x200/F44336/FFFFFF?text=Sony+A7+IV" alt="Sony A7 IV" style="width: 100%; height: 100%; object-fit: cover;">
+                    <button class="view-image-btn" onclick="event.stopPropagation(); openImageModal('https://via.placeholder.com/250x200/F44336/FFFFFF?text=Sony+A7+IV', 'Sony A7 IV')">👁️ ดูรูป</button>
+                </div>
+                <h3 class="product-title">Sony A7 IV</h3>
+                <div class="product-rating">⭐⭐⭐⭐ (98)</div>
+                <div class="product-price">฿68,999</div>
+                <div class="product-stock" data-stock-id="sony-a7-iv"></div>
+                <button class="buy-button" onclick="addToCartById('sony-a7-iv', 'Sony A7 IV', 68999)">เพิ่มลงตะกร้า</button>
+                <div class="admin-restock" data-admin-restock-id="sony-a7-iv">
+                    <span class="admin-restock-label">เติมสต๊อก (แอดมิน)</span>
+                    <div class="admin-restock-row">
+                        <input class="admin-restock-input" type="number" min="1" step="1" value="1" inputmode="numeric">
+                        <button class="admin-restock-btn" type="button" onclick="restockFromCard(this)">เติม</button>
+                    </div>
+                </div>
+                <button class="details-button" type="button" onclick="location.href='product.html?id=' + encodeURIComponent(this.closest('.product-card').dataset.favId)">รายละเอียดสินค้า</button>
+                <button class="fav-button" type="button">❤️ เพิ่มรายการโปรด</button>
+            </div>
+            
+            <div class="product-card" data-fav-id="playstation-5" data-fav-title="PlayStation 5" data-fav-price="฿15,999" data-fav-image="https://via.placeholder.com/250x200/00BCD4/FFFFFF?text=PlayStation+5">
+                <div class="product-image" onclick="openImageModal('https://via.placeholder.com/250x200/00BCD4/FFFFFF?text=PlayStation+5', 'PlayStation 5')">
+                    <img src="https://via.placeholder.com/250x200/00BCD4/FFFFFF?text=PlayStation+5" alt="PlayStation 5" style="width: 100%; height: 100%; object-fit: cover;">
+                    <button class="view-image-btn" onclick="event.stopPropagation(); openImageModal('https://via.placeholder.com/250x200/00BCD4/FFFFFF?text=PlayStation+5', 'PlayStation 5')">👁️ ดูรูป</button>
+                </div>
+                <h3 class="product-title">PlayStation 5</h3>
+                <div class="product-rating">⭐⭐⭐⭐ (445)</div>
+                <div class="product-price">฿15,999</div>
+                <div class="product-stock" data-stock-id="playstation-5"></div>
+                <button class="buy-button" onclick="addToCartById('playstation-5', 'PlayStation 5', 15999)">เพิ่มลงตะกร้า</button>
+                <div class="admin-restock" data-admin-restock-id="playstation-5">
+                    <span class="admin-restock-label">เติมสต๊อก (แอดมิน)</span>
+                    <div class="admin-restock-row">
+                        <input class="admin-restock-input" type="number" min="1" step="1" value="1" inputmode="numeric">
+                        <button class="admin-restock-btn" type="button" onclick="restockFromCard(this)">เติม</button>
+                    </div>
+                </div>
+                <button class="details-button" type="button" onclick="location.href='product.html?id=' + encodeURIComponent(this.closest('.product-card').dataset.favId)">รายละเอียดสินค้า</button>
+                <button class="fav-button" type="button">❤️ เพิ่มรายการโปรด</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>เกี่ยวกับเรา</h3>
+                <ul>
+                    <li><a href="#">ประวัติบริษัท</a></li>
+                    <li><a href="#">ทีมงาน</a></li>
+                    <li><a href="#">ร่วมงานกับเรา</a></li>
+                    <li><a href="#">ข่าวสาร</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>บริการลูกค้า</h3>
+                <ul>
+                    <li><a href="#">ศูนย์ช่วยเหลือ</a></li>
+                    <li><a href="#">การจัดส่ง</a></li>
+                    <li><a href="#">การคืนสินค้า</a></li>
+                    <li><a href="#">ติดต่อเรา</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>หมวดหมู่สินค้า</h3>
+                <ul>
+                    <li><a href="#">อิเล็กทรอนิกส์</a></li>
+                    <li><a href="#">เสื้อผ้า</a></li>
+                    <li><a href="#">หนังสือ</a></li>
+                    <li><a href="#">บ้านและสวน</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>ติดตามเรา</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal">
+        <video id="imageModalVideo" class="image-modal-video" autoplay muted loop playsinline>
+            <source id="imageModalVideoSource" src="video/bg.mp4" type="video/mp4">
+        </video>
+        <div class="image-modal-content">
+            <span class="close-modal" onclick="closeImageModal()">&times;</span>
+            <img id="modalImage" src="" alt="">
+        </div>
+    </div>
+
+    <audio id="productAudio" preload="auto"></audio>
+    
+    <!-- Promotion Modal -->
+    <div id="promoModal" class="promo-modal">
+        <div class="promo-modal-content">
+            <span class="close-modal" onclick="closePromoModal()">&times;</span>
+            <h2>🎉 โปรโมชั่นพิเศษ!</h2>
+            <p>อย่าลืมคลิกเพื่อรับส่วนลดพิเศษพิเศษ!</p>
+            
+            <ul class="promo-list">
+                <li>ลดราคาสูงสุด 70% สำหรับสินค้าอิเล็กทรอนิกส์</li>
+                <li>ฟรีค่าจัดส่งเมื่อซื้อขั้น 1,000 บาท</li>
+                <li>สะสมสินค้า 2 ชิ้น รับเพิ่ม 1 ชิ้นฟรี</li>
+                <li>Flash Sale วันศุกร์ ลดเพิ่ม 20%</li>
+                <li>สมาชิก VIP รับส่วนลดตลอดปี</li>
+            </ul>
+            
+            <button class="close-promo-btn" onclick="closePromoModal()">เริ่มช้อปเลย</button>
+        </div>
+    </div>
+    
+    <!-- Shopping Cart Modal -->
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-modal-content">
+            <div class="cart-header">
+                <h2>🛒 ตะกร้าสินค้า</h2>
+                <span class="close-modal" onclick="closeCartModal()">&times;</span>
+            </div>
+            <div class="cart-body">
+                <div id="cartItems" class="cart-items">
+                    <p class="empty-cart">ตะกร้าสินค้าว่างเปล่า</p>
+                </div>
+                <div class="cart-summary">
+                    <div class="cart-total">
+                        <strong>รวมทั้งหมด: <span id="cartTotal">฿0</span></strong>
+                    </div>
+                    <button class="checkout-btn" onclick="checkout()">ชำระเงิน</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="auth.js"></script>
+    
+    <script>
+        const videoMap = {
+            's-l1200.jpg': 'video/gavv.mp4',
+            's-l1200 (1).jpg': 'video/videoplayback.mp4',
+            'th-11134207-81zto-mhim18g3z9xfd4.jfif': 'video/[Omamori][Lyrics + Engsub] Be The One - PANDORA - Kamen Rider Build Opening.mp4',
+            '37990_300x300_nocrop.jpg': 'video/zezt.mp4'
+        };
+
+        let currentVideoSrc = '';
+
+        function setModalVideoFor(imageSrc, imageAlt) {
+            const modalVideo = document.getElementById('imageModalVideo');
+            const modalVideoSource = document.getElementById('imageModalVideoSource');
+            if (!modalVideo || !modalVideoSource) return;
+
+            const src = videoMap[imageSrc] || videoMap[imageAlt] || 'video/bg.mp4';
+            if (currentVideoSrc === src) return;
+
+            currentVideoSrc = src;
+            modalVideoSource.src = src;
+            modalVideo.load();
+        }
+
+        const audioMap = {
+            's-l1200.jpg': 'music/gavv.mp3',
+            's-l1200 (1).jpg': '【Life is SHOW TIME】Opening Kamen Rider Wizard.mp3',
+            'th-11134207-81zto-mhim18g3z9xfd4.jfif': 'Omamori Lyrics Engsub Be The One PANDORA Kamen Rider Build Opening (1).mp3',
+            '37990_300x300_nocrop.jpg': 'ROM.mp3'
+        };
+
+        let currentAudioSrc = '';
+
+        function playProductAudioFor(imageSrc, imageAlt) {
+            const audioEl = document.getElementById('productAudio');
+            if (!audioEl) return;
+
+            const src = audioMap[imageSrc] || audioMap[imageAlt] || '';
+            if (!src) {
+                if (!audioEl.paused) audioEl.pause();
+                currentAudioSrc = '';
+                return;
+            }
+
+            if (currentAudioSrc !== src) {
+                audioEl.pause();
+                audioEl.src = src;
+                currentAudioSrc = src;
+                audioEl.currentTime = 0;
+            }
+
+            const playPromise = audioEl.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise.catch(() => {});
+            }
+        }
+
+        function stopProductAudio() {
+            const audioEl = document.getElementById('productAudio');
+            if (!audioEl) return;
+            audioEl.pause();
+            audioEl.currentTime = 0;
+        }
+
+        let imageAutoFadeTimer = null;
+        let isHoldingImage = false;
+
+        function clearImageAutoFade() {
+            if (imageAutoFadeTimer) {
+                clearTimeout(imageAutoFadeTimer);
+                imageAutoFadeTimer = null;
+            }
+        }
+
+        function scheduleImageAutoFade() {
+            clearImageAutoFade();
+            const modalImg = document.getElementById('modalImage');
+            if (!modalImg) return;
+
+            modalImg.classList.remove('is-fading');
+
+            imageAutoFadeTimer = setTimeout(() => {
+                if (!isHoldingImage) {
+                    modalImg.classList.add('is-fading');
+                }
+            }, 4000);
+        }
+
+        function openImageModal(imageSrc, imageAlt) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const modalVideo = document.getElementById('imageModalVideo');
+            
+            modal.style.display = 'block';
+            modalImg.src = imageSrc;
+            modalImg.alt = imageAlt;
+            modalImg.classList.remove('is-fading');
+            document.body.style.overflow = 'hidden';
+
+            if (modalVideo) {
+                setModalVideoFor(imageSrc, imageAlt);
+                const playPromise = modalVideo.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    playPromise.catch(() => {});
+                }
+            }
+
+            playProductAudioFor(imageSrc, imageAlt);
+
+            isHoldingImage = false;
+            scheduleImageAutoFade();
+
+            modalImg.onmousedown = function () {
+                isHoldingImage = true;
+                modalImg.classList.remove('is-fading');
+                clearImageAutoFade();
+            };
+
+            modalImg.onmouseup = function () {
+                isHoldingImage = false;
+                scheduleImageAutoFade();
+            };
+
+            modalImg.onmouseleave = function () {
+                if (isHoldingImage) {
+                    isHoldingImage = false;
+                    scheduleImageAutoFade();
+                }
+            };
+        }
+        
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            const modalVideo = document.getElementById('imageModalVideo');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+
+            if (modalVideo) {
+                modalVideo.pause();
+                modalVideo.currentTime = 0;
+            }
+
+            stopProductAudio();
+
+            clearImageAutoFade();
+            isHoldingImage = false;
+            if (modalImg) {
+                modalImg.classList.remove('is-fading');
+                modalImg.onmousedown = null;
+                modalImg.onmouseup = null;
+                modalImg.onmouseleave = null;
+            }
+        }
+        
+        function openPromoModal() {
+            const modal = document.getElementById('promoModal');
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closePromoModal() {
+            const modal = document.getElementById('promoModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Shopping Cart Functions
+        let cart = [];
+        
+        function getCartQty(productId) {
+            const item = cart.find(x => x.id === productId);
+            return item ? item.quantity : 0;
+        }
+
+        function addToCartById(productId, productName, price) {
+            const stock = getStock(productId);
+            const inCart = getCartQty(productId);
+
+            if (stock <= 0) {
+                showNotification('สินค้าหมดแล้ว (Sold Out)');
+                updateStockUI();
+                return;
+            }
+
+            if (inCart >= stock) {
+                showNotification('ไม่สามารถเพิ่มเกินจำนวนคงเหลือได้');
+                return;
+            }
+
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    id: productId,
+                    name: productName,
+                    price: price,
+                    quantity: 1
+                });
+            }
+
+            updateCart();
+            updateStockUI();
+            showNotification('เพิ่มสินค้าลงตะกร้าแล้ว!');
+        }
+        
+        function removeFromCart(productId) {
+            const itemIndex = cart.findIndex(item => item.id === productId);
+            
+            if (itemIndex !== -1) {
+                if (cart[itemIndex].quantity > 1) {
+                    cart[itemIndex].quantity--;
+                } else {
+                    cart.splice(itemIndex, 1);
+                }
+                updateCart();
+                updateStockUI();
+                showNotification('ลดสินค้าจากตะกร้าแล้ว!');
+            }
+        }
+        
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="empty-cart">ตะกร้าสินค้าว่างเปล่า</p>';
+                cartCount.textContent = '0';
+                cartTotal.textContent = '฿0';
+                return;
+            }
+            
+            let html = '';
+            let total = 0;
+            let itemCount = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                itemCount += item.quantity;
+                
+                html += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <p>฿${item.price.toLocaleString()}</p>
+                        </div>
+                        <div class="cart-item-controls">
+                            <button class="quantity-btn" onclick='removeFromCart(${JSON.stringify(item.id)})'>-</button>
+                            <span class="quantity">${item.quantity}</span>
+                            <button class="quantity-btn" onclick='addToCartById(${JSON.stringify(item.id)}, ${JSON.stringify(item.name)}, ${item.price})'>+</button>
+                        </div>
+                        <div class="cart-item-total">
+                            <strong>฿${itemTotal.toLocaleString()}</strong>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartItems.innerHTML = html;
+            cartCount.textContent = itemCount;
+            cartTotal.textContent = `฿${total.toLocaleString()}`;
+        }
+        
+        function openCartModal() {
+            const modal = document.getElementById('cartModal');
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeCartModal() {
+            const modal = document.getElementById('cartModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function checkout() {
+            if (cart.length === 0) {
+                showNotification('ตะกร้าสินค้าว่างเปล่า!');
+                return;
+            }
+
+            cart.forEach(item => {
+                const current = getStock(item.id);
+                setStock(item.id, current - item.quantity);
+            });
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            showNotification(`ชำระเงินสำเร็จ! ยอดรวม: ฿${total.toLocaleString()}`);
+            cart = [];
+            updateCart();
+            updateStockUI();
+            closeCartModal();
+        }
+        
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const imageModal = document.getElementById('imageModal');
+            const promoModal = document.getElementById('promoModal');
+            const cartModal = document.getElementById('cartModal');
+            
+            if (event.target == imageModal) {
+                closeImageModal();
+            }
+            if (event.target == promoModal) {
+                closePromoModal();
+            }
+            if (event.target == cartModal) {
+                closeCartModal();
+            }
+        }
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeImageModal();
+                closePromoModal();
+                closeCartModal();
+            }
+        });
+
+        const stockDefaults = {
+            'bandai-kamen-rider-gavv-dx-gavv-driver': 1,
+            'kamen-rider-wizard-mini-driver': 1,
+            'Kamen Rider Build / DX Build Driver': 1,
+            'HENSHIN BELT DX ZEZTZ DRIVER': 1,
+            'sony-a7-iv': 2,
+            'playstation-5': 3
+        };
+
+        function getStockKey(productId) {
+            return 'stock:' + productId;
+        }
+
+        function ensureStockInitialized(productId) {
+            const key = getStockKey(productId);
+            const existing = localStorage.getItem(key);
+            if (existing !== null) return;
+            const initial = Object.prototype.hasOwnProperty.call(stockDefaults, productId) ? stockDefaults[productId] : 10;
+            localStorage.setItem(key, String(initial));
+        }
+
+        function getStock(productId) {
+            ensureStockInitialized(productId);
+            const raw = localStorage.getItem(getStockKey(productId));
+            const num = parseInt(raw || '0', 10);
+            return Number.isFinite(num) ? Math.max(0, num) : 0;
+        }
+
+        function setStock(productId, value) {
+            localStorage.setItem(getStockKey(productId), String(Math.max(0, value)));
+        }
+
+        function updateStockUI() {
+            const stockEls = document.querySelectorAll('[data-stock-id]');
+            stockEls.forEach(el => {
+                const id = el.getAttribute('data-stock-id');
+                const stock = getStock(id);
+                if (stock <= 0) {
+                    el.textContent = 'Sold Out';
+                    el.classList.add('is-soldout');
+                } else {
+                    el.textContent = 'คงเหลือ: ' + stock;
+                    el.classList.remove('is-soldout');
+                }
+
+                const card = el.closest('.product-card');
+                const buyBtn = card ? card.querySelector('.buy-button') : null;
+                if (buyBtn) {
+                    buyBtn.disabled = stock <= 0;
+                    if (stock <= 0) {
+                        buyBtn.textContent = 'Sold Out';
+                    } else {
+                        buyBtn.textContent = 'เพิ่มลงตะกร้า';
+                    }
+                }
+            });
+        }
+
+        const ADMIN_SESSION_KEY = 'admin:isLoggedIn';
+
+        function isAdmin() {
+            return localStorage.getItem(ADMIN_SESSION_KEY) === '1';
+        }
+
+        function setAdmin(value) {
+            localStorage.setItem(ADMIN_SESSION_KEY, value ? '1' : '0');
+        }
+
+        function updateAdminUI() {
+            const badge = document.getElementById('adminBadge');
+            if (badge) badge.style.display = isAdmin() ? 'inline-block' : 'none';
+
+            const restockEls = document.querySelectorAll('[data-admin-restock-id]');
+            restockEls.forEach(el => {
+                el.style.display = isAdmin() ? 'block' : 'none';
+            });
+            
+            const reportLink = document.getElementById('adminReportLink');
+            if (reportLink) reportLink.style.display = isAdmin() ? 'inline-block' : 'none';
+        }
+
+        function toggleAdmin() {
+            if (isAdmin()) {
+                const ok = confirm('ออกจากโหมดแอดมิน?');
+                if (!ok) return;
+                setAdmin(false);
+                updateAdminUI();
+                return;
+            }
+
+            if (!window.auth || !window.auth.isAdminUser || !window.auth.isAdminUser()) {
+                showNotification('เฉพาะบัญชี admin เท่านั้น');
+                return;
+            }
+
+            const pass = prompt('ใส่รหัสผ่าน admin');
+            if (pass === null) return;
+            if (window.auth.verifyCurrentUserPassword && window.auth.verifyCurrentUserPassword(String(pass))) {
+                setAdmin(true);
+                updateAdminUI();
+                showNotification('เข้าสู่โหมดแอดมินแล้ว');
+            } else {
+                showNotification('รหัสผ่านไม่ถูกต้อง');
+            }
+        }
+
+        function restockFromCard(btn) {
+            if (!isAdmin()) {
+                showNotification('เฉพาะแอดมินเท่านั้น');
+                return;
+            }
+
+            const wrap = btn.closest('[data-admin-restock-id]');
+            if (!wrap) return;
+            const productId = wrap.getAttribute('data-admin-restock-id');
+            const input = wrap.querySelector('input');
+            const add = parseInt((input && input.value) ? input.value : '0', 10);
+            if (!Number.isFinite(add) || add <= 0) {
+                showNotification('กรุณาใส่จำนวนที่ถูกต้อง');
+                return;
+            }
+
+            const current = getStock(productId);
+            setStock(productId, current + add);
+            updateStockUI();
+            showNotification('เติมสต๊อกเรียบร้อย');
+        }
+
+        function normalizeText(text) {
+            return (text || '').toString().trim().toLowerCase();
+        }
+
+        function filterProductsByQuery(query) {
+            const q = normalizeText(query);
+            const productCards = document.querySelectorAll('.product-grid .product-card');
+
+            productCards.forEach(card => {
+                const titleEl = card.querySelector('.product-title');
+                const title = normalizeText(titleEl ? titleEl.textContent : '');
+                const show = q === '' || title.includes(q);
+                card.style.display = show ? '' : 'none';
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            if (!searchInput) return;
+
+            searchInput.addEventListener('input', function() {
+                filterProductsByQuery(searchInput.value);
+            });
+
+            updateStockUI();
+            updateAdminUI();
+        });
+    </script>
+    <script src="favorites.js"></script>
+</body>
+</html>

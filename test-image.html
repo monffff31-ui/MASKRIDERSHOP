@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Image</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f3f3f3;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .image-test {
+            margin: 20px 0;
+            border: 2px solid #ddd;
+            padding: 10px;
+        }
+        .image-test img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        .info {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🖼️ ทดสอบการแสดงรูปภาพ</h1>
+        
+        <div class="info">
+            <strong>ไฟล์รูป:</strong> s-l1200.jpg<br>
+            <strong>ขนาด:</strong> 150,101 bytes<br>
+            <strong>Path:</strong> อยู่ในโฟลเดอร์เดียวกับไฟล์ HTML
+        </div>
+        
+        <div class="image-test">
+            <h3>รูปต้นฉบับ:</h3>
+            <img src="s-l1200.jpg" alt="Test Image">
+        </div>
+        
+        <div class="image-test">
+            <h3>รูปขนาด 250x200px:</h3>
+            <img src="s-l1200.jpg" alt="Test Image" style="width: 250px; height: 200px; object-fit: cover;">
+        </div>
+        
+        <div class="info">
+            <strong>ถ้ารูปไม่แสดง:</strong><br>
+            1. ตรวจสอบว่าไฟล์ s-l1200.jpg อยู่ในโฟลเดอร์เดียวกับไฟล์ HTML<br>
+            2. ลองเปิดไฟล์ test-image.html นี้ใน browser<br>
+            3. ตรวจสอบ console ของ browser ว่ามี error อะไร
+        </div>
+    </div>
+</body>
+</html>

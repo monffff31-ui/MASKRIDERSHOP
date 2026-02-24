@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ลงทะเบียน - MASKRIDER SHOP</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="auth.js"></script>
+</head>
+<body>
+    <header class="amazon-header">
+        <a href="Html.html" class="logo">MASKRIDER SHOP</a>
+
+        <div class="search-bar">
+            <select>
+                <option>ทุกหมวดหมู่</option>
+                <option>อิเล็กทรอนิกส์</option>
+                <option>เสื้อผ้า</option>
+                <option>หนังสือ</option>
+                <option>บ้านและสวน</option>
+            </select>
+            <input type="text" placeholder="ค้นหาสินค้า...">
+            <button>🔍 ค้นหา</button>
+        </div>
+
+        <div class="header-links">
+            <a id="accountLink" href="login.html">👤 บัญชีของฉัน</a>
+            <a id="logoutLink" href="#" style="display:none;">ออกจากระบบ</a>
+            <a href="favorites.html">❤️ รายการโปรด</a>
+        </div>
+    </header>
+
+    <nav>
+        <ul class="head-menu">
+            <li><a href="Html.html">หน้าแรก</a></li>
+            <li><a href="about.html">เกี่ยวกับเรา</a></li>
+            <li><a href="services.html">บริการ</a></li>
+            <li><a href="contact.html">ติดต่อเรา</a></li>
+        </ul>
+    </nav>
+
+    <main class="auth-page">
+        <section class="auth-card">
+            <h1 class="auth-title">ลงทะเบียน</h1>
+
+            <form id="registerForm" class="auth-form">
+                <div class="auth-field">
+                    <label for="username">ชื่อผู้ใช้</label>
+                    <input id="username" name="username" type="text" autocomplete="username" required>
+                </div>
+
+                <div class="auth-field">
+                    <label for="password">รหัสผ่าน</label>
+                    <input id="password" name="password" type="password" autocomplete="new-password" required>
+                </div>
+
+                <div class="auth-field">
+                    <label for="confirm">ยืนยันรหัสผ่าน</label>
+                    <input id="confirm" name="confirm" type="password" autocomplete="new-password" required>
+                </div>
+
+                <button class="checkout-btn" type="submit">สร้างบัญชี</button>
+                <div id="registerStatus" class="auth-status"></div>
+            </form>
+
+            <div class="auth-footer">
+                <span>มีบัญชีแล้ว?</span>
+                <a class="auth-link" href="login.html">เข้าสู่ระบบ</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        (function () {
+            const form = document.getElementById('registerForm');
+            const statusEl = document.getElementById('registerStatus');
+            if (!form) return;
+
+            function setStatus(message, type) {
+                if (!statusEl) return;
+                statusEl.textContent = message;
+                statusEl.style.color = type === 'success' ? '#2e7d32' : type === 'error' ? '#c62828' : '#333';
+            }
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const fd = new FormData(form);
+                const username = String(fd.get('username') || '').trim();
+                const password = String(fd.get('password') || '');
+                const confirm = String(fd.get('confirm') || '');
+
+                if (password !== confirm) {
+                    setStatus('รหัสผ่านไม่ตรงกัน', 'error');
+                    return;
+                }
+
+                const result = window.auth.register(username, password);
+                if (!result.ok) {
+                    setStatus(result.message || 'ลงทะเบียนไม่สำเร็จ', 'error');
+                    return;
+                }
+
+                window.auth.login(username, password);
+                setStatus('ลงทะเบียนสำเร็จ', 'success');
+
+                const returnUrl = window.auth.getReturnUrl();
+                location.href = returnUrl ? returnUrl : 'Html.html';
+            });
+        })();
+    </script>
+</body>
+</html>
